@@ -150,11 +150,10 @@ W Postmanie:
 
 ## 🧑‍💻 Autor
 
-Projekt stworzony w celach edukacyjnych.  
-Chcesz współpracować lub masz pytania? Napisz do mnie!
+Projekt stworzony w celach edukacyjnych. 
 
 ---
 
 ## 📄 Licencja
 
-Projekt dostępny na licencji MIT — używaj, modyfikuj i ucz się śmiało 😊
+Projekt dostępny na licencji MIT 😊
