@@ -43,7 +43,7 @@ Przykładowy dokument:
   "_id": "ObjectId",
   "tytul": "Zupa krem z dyni",
   "autor": "Anna Nowak",
-  "czasPrzygotowania": "30 minut",
+  "czas": "30 minut",
   "kategoria": "zupa",
   "skladniki": ["dynia", "cebula", "czosnek", "bulion"],
   "kroki": ["Pokrój dynię", "Podsmaż cebulę", "Gotuj razem"],
