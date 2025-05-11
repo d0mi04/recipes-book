@@ -99,8 +99,9 @@ node app.js
 | GET    | /przepisy         | Pobierz wszystkie przepisy           |
 | POST   | /przepisy         | Dodaj nowy przepis                   |
 | GET    | /przepisy/:id     | Pobierz przepis po ID                |
-| DELETE | /przepisy/:id     | Usuń przepis po ID                   |
+| GET    | /przepisy/?skladnik     | Pobierz listę przepisów zawierających dany składnik                |
 | PUT    | /przepisy/:id     | Zaktualizuj przepis po ID           |
+| DELETE | /przepisy/:id     | Usuń przepis po ID                   |
 
 ### 🔹 Przykład POST (dodanie przepisu)
 W Postmanie:
@@ -111,7 +112,7 @@ W Postmanie:
 {
   "tytul": "Spaghetti Carbonara",
   "autor": "Jan Kowalski",
-  "czasPrzygotowania": "20 minut",
+  "czas": "20 minut",
   "kategoria": "obiad",
   "skladniki": ["makaron", "jajka", "boczek", "parmezan"],
   "kroki": ["Ugotuj makaron", "Podsmaż boczek", "Wymieszaj wszystko"],
@@ -126,7 +127,6 @@ W Postmanie:
 
 - Dane do połączenia z bazą przechowywane są w `.env` (dodany do `.gitignore`).
 - **Nigdy nie commituj pliku `.env`** ani danych uwierzytelniających.
-- Można dodać middleware do walidacji danych (`express-validator`) i zabezpieczenia (`helmet`, `cors`) — gotowe do rozszerzenia.
 
 ---
 
@@ -140,15 +140,15 @@ W Postmanie:
 
 ## 🛠️ Plany rozwoju
 
-- 🔑 Autoryzacja i logowanie użytkowników (`JWT`)
+- 🔑 Autoryzacja i logowanie użytkowników
 - ⭐ Możliwość dodawania ulubionych przepisów
-- 🔍 Wyszukiwanie przepisów po składnikach
+- 🔍 Wyszukiwanie przepisów po składnikach (work in progress)
 - 💻 Frontend w React (opcjonalnie)
 - 📈 System ocen użytkowników (oddzielna kolekcja)
 
 ---
 
-## 🧑‍💻 Autor
+## 🧑‍💻 Autorzy
 
 Projekt stworzony w celach edukacyjnych. 
 
