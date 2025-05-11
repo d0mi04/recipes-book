@@ -28,6 +28,23 @@ router.get('/', async (req, res) => {
   }
 });
 
+// GET /przepisy/:id - wyszukiwanie przepisu po id
+router.get('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const przepis = await Przepis.findById(id);
+
+    if (!przepis) {
+      return res.status(404).json({ message: '🫢 Nie znaleziono przepisu' });
+    }
+
+    res.json(przepis);
+  } catch (err) {
+    console.error('🫢 Błąd przy pobieraniu przepisu:', err);
+    res.status(500).json({ message: '❌ Błąd serwera' });
+  }
+});
+
 
 // POST /przepisy – dodaj nowy przepis
 router.post('/', async (req, res) => {
