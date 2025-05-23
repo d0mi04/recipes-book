@@ -1,8 +1,10 @@
-require('dotenv').config();
+const dotenv = require('dotenv');
 const express = require('express');
 const mongoose = require('mongoose');
 const przepisyRoutes = require('./routes/przepisy');
+const authRoutes = require('./routes/auth');
 
+dotenv.config();
 const app = express();
 app.use(express.json());
 
@@ -13,6 +15,7 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // Routing
 app.use('/przepisy', przepisyRoutes);
+app.use('/auth', authRoutes);
 
 // Start
 const PORT = process.env.PORT || 3000;
