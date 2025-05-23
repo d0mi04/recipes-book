@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken'); // require JWT
 const Uzytkownik = require('../models/Uzytkownik');
 
 const router = express.Router();
@@ -18,7 +19,7 @@ router.post('/register', async (req, res) => {
         }
 
         // hashowanie hasla, czy coś takiego:
-        const salt = await bcrypt.genSalt(10); 
+        const salt = await bcrypt.genSalt(10);  // uzywanie salt podobno daje większą elastyczność
         const passwordHash = await bcrypt.hash(password, salt);
 
         // tworzenie nowego uzytkownika
@@ -64,11 +65,25 @@ router.post('/login', async (req, res) => {
             });
         }
 
-        res.status(200).json({
-            message: '✅ Login successful.',
+        // tworzenie tokenu JWT
+        const token = jwt.sign(
+            {
+                userId: user._id,
+                username: user.username,
+            },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: '1h'
+            }
+        );
+
+        res.status(200).json({ 
+            message: '✅ Login successful, token created.',
             userId: user._id,
-            username: user.username,
+            username: user.username, 
+            token: token,
         });
+
     } catch (err) {
         console.error('Login error:', err);
         res.status(500).json({

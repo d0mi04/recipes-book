@@ -1,12 +1,8 @@
 const express = require('express');
-const router = express.Router();
 const Przepis = require('../models/Przepis');
+const authMiddleware = require('../middleware/authMiddleware');
 
-// GET /przepisy – pobierz wszystkie - to musiałam wykomentować, bo inaczej filtrowanie nie działało
-// router.get('/', async (req, res) => {
-//   const przepisy = await Przepis.find();
-//   res.json(przepisy);
-// });
+const router = express.Router();
 
 // GET /przepisy?skladnik=cebula – filtrowanie po składniku
 router.get('/', async (req, res) => {
@@ -90,6 +86,13 @@ router.delete('/:id', async (req, res) => {
     console.error('❌ Błąd przy usuwaniu przepisu:', err);
     res.status(500).json({ message: '❌ Błąd serwera' });
   }
+});
+
+// używanie autoryzacji w przypadku przejścia do zakładki ulubione - tylko dla zalogowanego użytkownika
+router.get('/ulubione', authMiddleware, (req, res) => {
+  res.json({
+    message: `✅ Access is granted for user: ${req.user.username}`
+  });
 });
 
 
