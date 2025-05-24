@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 
-function authMiddleware(req, res, next) {
+function verifyToken(req, res, next) {
     const authHeader = req.headers.authorization;
+    console.log('👉 Authorization header:', authHeader);
 
     if(!authHeader || !authHeader.startsWith('Bearer ')) {
         return res.status(401).json({
@@ -23,4 +24,4 @@ function authMiddleware(req, res, next) {
     }
 }
 
-module.exports = authMiddleware;
+module.exports = verifyToken;
