@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 
 const przepisSchema = new mongoose.Schema({
-  tytul: String,
-  autor: String,
-  czas: Number,
-  kategoria: String,
-  skladniki: [String],
-  kroki: [String],
-  ocena: Number,
+  tytul: {type: String, required: true, unique: true},
+  autor: {type: String, required: true},
+  czas: {type: Number, required: true},
+  kategoria: {type: String}, // nie musi być wymagana
+  skladniki: [{type: String, required: true}],
+  kroki: [{type: String, required: true}],
+  ocena: {type: Number}, // nikt nie ocenił to nie musi być wymagana
   dataDodania: {
-    type: Date,
+    type: Date, required: true,
     default: Date.now
   }
 });
