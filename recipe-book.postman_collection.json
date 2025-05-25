@@ -1,0 +1,353 @@
+{
+	"info": {
+		"_postman_id": "dd438824-cc8a-479f-aff1-7950def0d1ed",
+		"name": "recipe-book",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44166293",
+		"_collection_link": "https://d0mi04-5758946.postman.co/workspace/Recipe-Book~c10830c4-1494-409a-bcd7-5c4a64c2e074/collection/44166293-dd438824-cc8a-479f-aff1-7950def0d1ed?action=share&source=collection_link&creator=44166293"
+	},
+	"item": [
+		{
+			"name": "Autoryzacja i Logowanie",
+			"item": [
+				{
+					"name": "/auth/register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"user4\",\r\n  \"email\": \"user4@example.com\",\r\n  \"password\": \"userPass444\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"register"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/auth/login",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"user4@example.com\",\r\n  \"password\": \"userPass444\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Użytkownik",
+			"item": [
+				{
+					"name": "/uzytkownik/:userId/ulubione",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODMxNzVkNDdlNzBlNzFlZGZhMDM3NTgiLCJ1c2VybmFtZSI6InVzZXI0IiwiaWF0IjoxNzQ4MjEwNzI2LCJleHAiOjE3NDgyMTQzMjZ9.qKBEZOcQCdAXS9oVVKFg-8jrpcFrhBp7aE0NIWOBXEc",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"przepisId\": \"68338f23fa7d2de323d7828d\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/uzytkownik/683175d47e70e71edfa03758/ulubione",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"uzytkownik",
+								"683175d47e70e71edfa03758",
+								"ulubione"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/uzytkownik/:userId/ulubione",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODMxNzVkNDdlNzBlNzFlZGZhMDM3NTgiLCJ1c2VybmFtZSI6InVzZXI0IiwiaWF0IjoxNzQ4MjEwNTQ5LCJleHAiOjE3NDgyMTQxNDl9.8qq7IlRmON3sJdqotnmFCogPXvXxxEpWWUFLxaEJses",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/uzytkownik/683175d47e70e71edfa03758/ulubione",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"uzytkownik",
+								"683175d47e70e71edfa03758",
+								"ulubione"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/uzytkownik/:userId/ulubione/:recipeId",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODMxNzVkNDdlNzBlNzFlZGZhMDM3NTgiLCJ1c2VybmFtZSI6InVzZXI0IiwiaWF0IjoxNzQ4MjEwNzI2LCJleHAiOjE3NDgyMTQzMjZ9.qKBEZOcQCdAXS9oVVKFg-8jrpcFrhBp7aE0NIWOBXEc",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/uzytkownik/683175d47e70e71edfa03758/ulubione/68338f23fa7d2de323d7828d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"uzytkownik",
+								"683175d47e70e71edfa03758",
+								"ulubione",
+								"68338f23fa7d2de323d7828d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Przepisy",
+			"item": [
+				{
+					"name": "/przepisy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/przepisy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"przepisy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/przepisy/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/przepisy/68338f23fa7d2de323d7828d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"przepisy",
+								"68338f23fa7d2de323d7828d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/przepisy?skladnik",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/przepisy?skladnik=cebula",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"przepisy"
+							],
+							"query": [
+								{
+									"key": "skladnik",
+									"value": "cebula"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/przepisy/:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"_id\": \"68016e3cfc394a8e3099b625\",\r\n        \"tytul\": \"Zupa krem z dyni\",\r\n        \"autor\": \"Ania\",\r\n        \"czas\": 30,\r\n        \"kategoria\": \"zupa\",\r\n        \"skladniki\": [\r\n            \"dynia\",\r\n            \"czosnek\",\r\n            \"cebula\",\r\n            \"bulion\",\r\n            \"pomidory\",\r\n            \"pietruszka\",\r\n            \"papryka\"\r\n        ],\r\n        \"kroki\": [\r\n            \"Pokrój warzywa\",\r\n            \"Podsmaż cebulę\",\r\n            \"Dodaj bulion\",\r\n            \"Zmiksuj\"\r\n        ],\r\n        \"ocena\": 5,\r\n        \"dataDodania\": \"2025-04-17T21:10:20.253Z\",\r\n        \"__v\": 0\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/przepisy/68016e3cfc394a8e3099b625",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"przepisy",
+								"68016e3cfc394a8e3099b625"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/przepisy/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/przepisy/68205c4e3f3c6fb6db1cf231",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"przepisy",
+								"68205c4e3f3c6fb6db1cf231"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/przepisy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tytul\": \"frytki\",\r\n    \"autor\": \"Ania\",\r\n    \"czas\": 40,\r\n    \"kategoria\": \"przekąska\",\r\n    \"skladniki\": [\r\n        \"ziemniaki\",\r\n        \"olej\"\r\n    ],\r\n    \"kroki\": [\r\n        \"Obierz ziemniaki ze skórki.\",\r\n        \"pokrój w słupki.\",\r\n        \"Smaż na oleju przez 10 min.\",\r\n        \"Dopraw solą i pieprzem.\"\r\n    ],\r\n    \"ocena\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/przepisy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"przepisy"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
