@@ -14,7 +14,7 @@ function verifyToken(req, res, next) {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decoded; // tu jest zapisanie danych użytkownika w req.user
+        req.userId = decoded.id; // tu jest zapisanie danych użytkownika w req.user
         
         next();
     } catch (err) {

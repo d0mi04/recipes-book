@@ -1,6 +1,6 @@
 const express = require('express');
 const Przepis = require('../models/Przepis');
-const authMiddleware = require('../middleware/authMiddleware');
+const verifyToken = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
@@ -89,7 +89,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 // używanie autoryzacji w przypadku przejścia do zakładki ulubione - tylko dla zalogowanego użytkownika
-router.get('/ulubione', authMiddleware, (req, res) => {
+router.get('/ulubione', verifyToken, (req, res) => {
   res.json({
     message: `✅ Access is granted for user: ${req.user.username}`
   });
