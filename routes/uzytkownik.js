@@ -5,6 +5,25 @@ const verifyToken = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
+// GET /uzytkownik/:id/moje-przepisy
+router.get('/:userId/moje-przepisy', verifyToken, async (req, res) => {
+    try {
+        const userId = req.params.userId;
+
+        // czy req.user._id === userId
+        const mojePrzepisy = await Przepis.find({ autor: userId });
+
+        res.status(200).json({
+            myRecipes: mojePrzepisy
+        });
+    } catch {
+        res.status(500).json({
+            message: '🖥 Server error!',
+            error: err.message
+        })
+    }
+});
+
 // GET /uzytkownik/:id/ulubione --> zwracanie wszystkich ulubionych przepisów
 router.get('/:userId/ulubione', verifyToken, async (req, res) => {
     const userId = req.params.userId;
@@ -48,6 +67,12 @@ router.get('/:userId/ulubione', verifyToken, async (req, res) => {
 router.post('/:userId/ulubione', verifyToken, async (req, res) => {
     const userId = req.params.userId;
     const { przepisId } = req.body;
+
+    // if(String(req.userId) !== String(userId)) { // bo w bazie danych _id to ObjectId, a req.params.userId to String
+    //     return res.status(403).json({
+    //         message: '⛔ You are not authorized to add recipes to this user\'s favouriteRecipes!'
+    //     });
+    // }
 
     try {
         const user = await Uzytkownik.findById(userId);

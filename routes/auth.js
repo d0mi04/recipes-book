@@ -69,7 +69,7 @@ router.post('/login', async (req, res) => {
         const token = jwt.sign(
             {
                 userId: user._id,
-                username: user.username,
+                email: user.email,
             },
             process.env.JWT_SECRET,
             {
@@ -81,7 +81,7 @@ router.post('/login', async (req, res) => {
             message: '✅ Login successful, token created.',
             userId: user._id,
             username: user.username, 
-            token: token,
+            token: `Bearer ${token}`,
         });
 
     } catch (err) {
