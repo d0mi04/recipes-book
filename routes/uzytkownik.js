@@ -24,11 +24,10 @@ router.get('/:userId/moje-przepisy', verifyToken, async (req, res) => {
     }
 });
 
-// GET /uzytkownik/:id/ulubione --> zwracanie wszystkich ulubionych przepisów
-router.get('/:userId/ulubione', verifyToken, async (req, res) => {
-    const userId = req.params.userId;
-
+// GET /uzytkownik/ulubione --> zwracanie wszystkich ulubionych przepisów - nowa wersja, będzie pobierać userId z tokena - bezpieczeństwo robi brr 📈
+router.get('/ulubione', verifyToken, async (req, res) => { // /userId/ulubione --> ulubione
     try {
+        const userId = req.user.userId; // userId pobieramy z tokena
         const user = await Uzytkownik.findById(userId);
 
         if(!user) {
@@ -64,15 +63,9 @@ router.get('/:userId/ulubione', verifyToken, async (req, res) => {
 })
 
 // POST /uzytkownik/:id/ulubione --> dodawanie ulubionego przepisu
-router.post('/:userId/ulubione', verifyToken, async (req, res) => {
-    const userId = req.params.userId;
+router.post('/ulubione', verifyToken, async (req, res) => {
     const { przepisId } = req.body;
-
-    // if(String(req.userId) !== String(userId)) { // bo w bazie danych _id to ObjectId, a req.params.userId to String
-    //     return res.status(403).json({
-    //         message: '⛔ You are not authorized to add recipes to this user\'s favouriteRecipes!'
-    //     });
-    // }
+    const userId = req.user.userId; // userId pobieramy z tokena
 
     try {
         const user = await Uzytkownik.findById(userId);
@@ -111,8 +104,9 @@ router.post('/:userId/ulubione', verifyToken, async (req, res) => {
 });
 
 // DELETE /uzytkownik/:userId/ulubione --> usuwanie przepisu z listy ulubionych
-router.delete('/:userId/ulubione/:przepisId', verifyToken, async (req, res) => {
-    const { userId, przepisId  } = req.params;
+router.delete('/ulubione/:przepisId', verifyToken, async (req, res) => {
+    const { przepisId  } = req.params;
+    const userId = req.user.userId; // userId pobieramy z tokena
 
     try {
         const user = await Uzytkownik.findById(userId);
