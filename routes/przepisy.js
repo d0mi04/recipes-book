@@ -2,6 +2,7 @@ const express = require('express');
 const Przepis = require('../models/Przepis');
 const Ocena = require('../models/Ocena'); // faza 2️⃣ - wyświetlanie średniej oceny
 const verifyToken = require('../middleware/authMiddleware');
+const Uzytkownik = require('../models/Uzytkownik');
 
 const router = express.Router();
 
@@ -93,19 +94,55 @@ router.get('/:id', async (req, res) => {
 
 
 // POST /przepisy – dodaj nowy przepis
-router.post('/', async (req, res) => {
-  const nowy = new Przepis(req.body);
-  await nowy.save();
-  res.status(201).json(nowy);
+router.post('/', verifyToken, async (req, res) => {
+  const userId = req.user.userId;
+  const { tytul, czas, kategoria, skladniki, kroki } = req.body;
+
+  if (!tytul || !czas || !skladniki || !kroki) {
+    return res.status(400).json({ 
+    message: '⛔ Wypełnij wszystkie wymagane pola!' 
+    });
+  }
+
+  try {
+    const nowyPrzepis = new Przepis({
+      tytul,
+      autor: userId, // to jest wzięte z tokena
+      czas,
+      kategoria,
+      skladniki,
+      kroki
+    });
+
+    await nowyPrzepis.save();
+
+    // dodanie id przepisu do tablicy myRecipes autora przepisu
+    await Uzytkownik.findByIdAndUpdate(userId, {
+      $addToSet: { myRecipes: nowyPrzepis._id } // to ma pomóc uniknąć duplikaów
+    });
+
+    res.status(201).json({
+      message: '✅ new recipe has been created!',
+      przepis: nowyPrzepis
+    });
+
+  } catch (err) {
+      res.status(500).json({
+        error: err.message, 
+        message: '🖥 Server error!'
+    });
+  }
+
 });
 
 // PUT /przepisy/:id – edytuj przepis
-router.put('/:id', async (req, res) => {
+router.put('/:przepisId', verifyToken, async (req, res) => {
+  const { przepisId } = req.params;
+  const userId = req.user.userId;
+  const noweDane = req.body;
+  
   try {
-    const { id } = req.params;
-    const noweDane = req.body;
-
-    const zaktualizowany = await Przepis.findByIdAndUpdate(id, noweDane, {
+    const zaktualizowany = await Przepis.findByIdAndUpdate(przepisId, noweDane, {
       new: true, // zwraca nowy dokument po aktualizacji
       runValidators: true, // sprawdza zgodność z schemą
     });
@@ -122,16 +159,38 @@ router.put('/:id', async (req, res) => {
 });
 
 // DELETE /przepisy/:id – usuwanie przepisu - po id
-router.delete('/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const usuniety = await Przepis.findByIdAndDelete(id);
+router.delete('/:przepisId', verifyToken, async (req, res) => {
+  const { przepisId } = req.params;
+  const userId = req.user.userId;
 
+  try {
+    const usuniety = await Przepis.findById(przepisId);
     if (!usuniety) {
-      return res.status(404).json({ message: '🫢 Nie znaleziono przepisu do usunięcia' });
+      return res.status(404).json({ 
+        message: '🫢 Nie znaleziono przepisu do usunięcia' 
+      });
     }
 
-    res.json({ message: '✅ Przepis został usunięty', przepis: usuniety });
+    await usuniety.deleteOne();
+
+    // usuwanie Id przepisu z moje-przepisy --> dla autora przepisu
+    await Uzytkownik.findByIdAndUpdate( userId, {
+      $pull: {myRecipes: przepisId }
+    });
+
+    // ktoś inny może mieć ten przepis w ulubionych --> trzeba mu go usunąć
+    await Uzytkownik.deleteMany(
+      { favouriteRecipes: przepisId },
+      { $pull: { favouriteRecipes: przepisId }}
+    );
+
+    // usuwanie wszystkich ocen powiązanych z tym przepisem
+    await Ocena.deleteMany({ przepisId });
+
+    res.json({ 
+      message: '✅ Przepis został usunięty', 
+      przepis: usuniety 
+    });
   } catch (err) {
     console.error('❌ Błąd przy usuwaniu przepisu:', err);
     res.status(500).json({ message: '❌ Błąd serwera' });
