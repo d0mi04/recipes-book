@@ -175,13 +175,13 @@ router.delete('/:przepisId', verifyToken, async (req, res) => {
 
     // usuwanie Id przepisu z moje-przepisy --> dla autora przepisu
     await Uzytkownik.findByIdAndUpdate( userId, {
-      $pull: {myRecipes: przepisId }
+      $pull: { myRecipes: przepisId }
     });
 
-    // ktoś inny może mieć ten przepis w ulubionych --> trzeba mu go usunąć
-    await Uzytkownik.deleteMany(
+    // usuwanie przepisu z listy favouriteRecipes u innych użytkowników:
+    await Uzytkownik.updateMany(
       { favouriteRecipes: przepisId },
-      { $pull: { favouriteRecipes: przepisId }}
+      { $pull: {favouriteRecipes: przepisId }}
     );
 
     // usuwanie wszystkich ocen powiązanych z tym przepisem
@@ -193,7 +193,9 @@ router.delete('/:przepisId', verifyToken, async (req, res) => {
     });
   } catch (err) {
     console.error('❌ Błąd przy usuwaniu przepisu:', err);
-    res.status(500).json({ message: '❌ Błąd serwera' });
+    res.status(500).json({ 
+      message: '❌ Błąd serwera' 
+    });
   }
 });
 

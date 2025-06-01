@@ -87,8 +87,15 @@ router.get('/:przepisId', async (req, res) => {
     const przepisId = req.params.przepisId;
 
     try {
-        const oceny = await Ocena.find({ przepisId }).sort({ data: -1 });
+        const przepis = await Przepis.findById(przepisId);
+        if(!przepis) {
+            return res.status(404).json({
+                message: '⛔ Recipe does not exist!'
+            });
+        }
         
+        const oceny = await Ocena.find({ przepisId }).sort({ data: -1 });
+
         res.status(200).json({
             oceny
         });
