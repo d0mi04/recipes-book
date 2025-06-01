@@ -5,6 +5,31 @@ const verifyToken = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
+// GET /oceny?moje-oceny="userId" --> zwrócenie wszystkich ocen, które wystawił zalgowany użytkownik
+router.get('/moje-oceny', verifyToken, async (req, res) => {
+    const userId = req.user.userId;
+
+    try {
+        const mojeOceny = await Ocena.find({ userId: userId });
+
+        if(!mojeOceny) {
+            return res.status(404).json({
+                message: '⛔ no rates to show.'
+            })
+        }
+
+        res.status(200).json({
+            mojeOceny
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            error: err,
+            message: '🖥 Server error!'
+        });
+    }
+});
+
 // POST /oceny/:przepisId - dodanie oceny do konkretnego przepisu - dla zalogowanego użytkownika
 router.post('/:przepisId', verifyToken, async (req, res) => {
   const przepisId = req.params.przepisId;
@@ -75,9 +100,6 @@ router.get('/:przepisId', async (req, res) => {
         });
     }
 });
-
-// GET /oceny?moje-oceny="userId" --> zwrócenie wszystkich ocen, które wystawił zalgowany użytkownik
-
 
 // PUT /oceny/:przepisId --> ponieważ user może wystawić dla jednego przepisu jedną ocenę, to po id przepisu może zaktualizować ocenę
 router.put('/:przepisId', verifyToken, async (req, res) => {
