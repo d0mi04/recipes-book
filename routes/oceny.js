@@ -80,13 +80,74 @@ router.get('/:przepisId', async (req, res) => {
 
 
 // PUT /oceny/:przepisId --> ponieważ user może wystawić dla jednego przepisu jedną ocenę, to po id przepisu może zaktualizować ocenę
-router.put('/:przepisyId', verifyToken, async (req, res) => {
+router.put('/:przepisId', verifyToken, async (req, res) => {
+    // żeby znaleźć odpowiedni przepis i autora komentarza:
+    const przepisId = req.params.przepisId;
+    const userId = req.user.userId;
 
+    // zaktualizowana ocena i zaktualizowany komentarz
+    const { ocena, komentarz } = req.body;
+
+    try {
+        // sprawdzenie, czy ocena już istnieje --> czy jest co edytować
+        const existing = await Ocena.findOne({ przepisId, userId });
+        if(!existing) {
+        return res.status(404).json({
+            message: '⛔ No rates to edit! Add first rate!'
+        });
+        }
+
+        // aktualizacja oceny:
+        if( ocena !== undefined ) {
+            existing.ocena = ocena;
+        }
+
+        if( komentarz !== undefined ) {
+            existing.komentarz = komentarz;
+        } 
+
+        await existing.save();
+
+        res.status(200).json({
+            message: '✅ Your rate was updated!',
+            existing
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            error: err,
+            message: '🖥 Server error while updating rate!'
+        });
+    }
 });
 
 // DELETE /oceny/:idPrzepisu --> usunięcie swojej oceny dla konkretnego przepisu
-router.delete(':przepisyId', verifyToken, async (req, res) => {
+router.delete('/:przepisId', verifyToken, async (req, res) => {
+    const przepisId = req.params.przepisId;
+    const userId = req.user.userId;
 
+    try {
+        const existing = await Ocena.findOne({ przepisId, userId });
+        if(!existing) {
+            return res.status(404).json({
+                message: '⛔ Rate does not exist!'
+            });
+        }
+
+        await existing.deleteOne();
+
+        res.status(200).json({
+            message: '🗑️ Rate was deleted.'
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            error: err,
+            message: '🖥 Server error while deleting rate!'
+        });
+    }
 });
 
 module.exports = router;
