@@ -7,7 +7,7 @@ const przepisSchema = new mongoose.Schema({
   kategoria: {type: String}, // nie musi być wymagana
   skladniki: [{type: String, required: true}],
   kroki: [{type: String, required: true}],
-  ocena: {type: Number}, // nikt nie ocenił to nie musi być wymagana
+  // ocena: {type: Number}, // nikt nie ocenił to nie musi być wymagana
   dataDodania: {
     type: Date, required: true,
     default: Date.now
