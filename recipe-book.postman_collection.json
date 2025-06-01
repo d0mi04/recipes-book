@@ -1,0 +1,585 @@
+{
+	"info": {
+		"_postman_id": "dd438824-cc8a-479f-aff1-7950def0d1ed",
+		"name": "recipe-book",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44166293",
+		"_collection_link": "https://d0mi04-5758946.postman.co/workspace/Recipe-Book~c10830c4-1494-409a-bcd7-5c4a64c2e074/collection/44166293-dd438824-cc8a-479f-aff1-7950def0d1ed?action=share&source=collection_link&creator=44166293"
+	},
+	"item": [
+		{
+			"name": "Autoryzacja i Logowanie",
+			"item": [
+				{
+					"name": "/auth/register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"user3\",\r\n  \"email\": \"user3@example.com\",\r\n  \"password\": \"userPass333\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"register"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/auth/login",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"user1@example.com\",\r\n  \"password\": \"userPass111\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Użytkownik",
+			"item": [
+				{
+					"name": "uzytkownik/moje-przepisy",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODNjNmEyNGFmODFhNzVlM2RkNTUxZDMiLCJlbWFpbCI6InVzZXIyQGV4YW1wbGUuY29tIiwiaWF0IjoxNzQ4NzkwMjI5LCJleHAiOjE3NDg3OTM4Mjl9.UG45JZmTqf8b8X_UMtFJe5TsHV4MP32EsXiQsb4mTyU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/uzytkownik/moje-przepisy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"uzytkownik",
+								"moje-przepisy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/uzytkownik/ulubione",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODMxNzVkNDdlNzBlNzFlZGZhMDM3NTgiLCJlbWFpbCI6InVzZXI0QGV4YW1wbGUuY29tIiwiaWF0IjoxNzQ4NzkwNzUyLCJleHAiOjE3NDg3OTQzNTJ9.CABs5iyukffzgMQaQvduL0hNntcuUVVzt3oDZ1B7yys",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/uzytkownik/ulubione",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"uzytkownik",
+								"ulubione"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/uzytkownik/ulubione",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODNjNmE5N2FmODFhNzVlM2RkNTUxZGEiLCJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNzQ4NzkwODg1LCJleHAiOjE3NDg3OTQ0ODV9.tCORjry_hicyDcJFDjeTOoypBXDKd3B7g6vGnW2e8OQ",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"przepisId\": \"683c6b4aaf81a75e3dd551dd\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/uzytkownik/ulubione",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"uzytkownik",
+								"ulubione"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/uzytkownik/ulubione/:recipeId",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODMxNzVkNDdlNzBlNzFlZGZhMDM3NTgiLCJlbWFpbCI6InVzZXI0QGV4YW1wbGUuY29tIiwiaWF0IjoxNzQ4NzEwMjM2LCJleHAiOjE3NDg3MTM4MzZ9.IzuQNX6eHJx3sHOIldQwZcyGD_YgwZj8JK_W1X83uCk",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/uzytkownik/ulubione/6837852a7106e097d0f2fc76",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"uzytkownik",
+								"ulubione",
+								"6837852a7106e097d0f2fc76"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Oceny",
+			"item": [
+				{
+					"name": "/oceny/moje-oceny",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODNjNmEyNGFmODFhNzVlM2RkNTUxZDMiLCJlbWFpbCI6InVzZXIyQGV4YW1wbGUuY29tIiwiaWF0IjoxNzQ4NzkwMjI5LCJleHAiOjE3NDg3OTM4Mjl9.UG45JZmTqf8b8X_UMtFJe5TsHV4MP32EsXiQsb4mTyU",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"ocena\": 3,\r\n  \"komentarz\": \"takie średnie...\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:3000/oceny/moje-oceny",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"oceny",
+								"moje-oceny"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/oceny/:przepisId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODMxNzVkNDdlNzBlNzFlZGZhMDM3NTgiLCJlbWFpbCI6InVzZXI0QGV4YW1wbGUuY29tIiwiaWF0IjoxNzQ4NzY4MjU1LCJleHAiOjE3NDg3NzE4NTV9.HjtVV73kHwA5HD3rmKlyu9ylKsfr1tIZ4wYnJhI27x4",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"ocena\": 3,\r\n  \"komentarz\": \"takie średnie...\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:3000/oceny/683c379939b5076e15d3a86f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"oceny",
+								"683c379939b5076e15d3a86f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/oceny/:przepisId",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODNjNmEyNGFmODFhNzVlM2RkNTUxZDMiLCJlbWFpbCI6InVzZXIyQGV4YW1wbGUuY29tIiwiaWF0IjoxNzQ4NzkwMjI5LCJleHAiOjE3NDg3OTM4Mjl9.UG45JZmTqf8b8X_UMtFJe5TsHV4MP32EsXiQsb4mTyU",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"ocena\": 5,\r\n  \"komentarz\": \"smaczne!\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/oceny/683c67f5af81a75e3dd551b0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"oceny",
+								"683c67f5af81a75e3dd551b0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/oceny/:przepisId",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODMxNzVkNDdlNzBlNzFlZGZhMDM3NTgiLCJlbWFpbCI6InVzZXI0QGV4YW1wbGUuY29tIiwiaWF0IjoxNzQ4NzY4OTgyLCJleHAiOjE3NDg3NzI1ODJ9.XzbdXfYsmB0WSIK8cZvCchGb-c8m6dL3MY4l8semCwo",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"ocena\": 5,\r\n  \"komentarz\": \"rewelacja\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:3000/oceny/68016f34fc394a8e3099b62c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"oceny",
+								"68016f34fc394a8e3099b62c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/oceny/:przepisId",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODMxNzVkNDdlNzBlNzFlZGZhMDM3NTgiLCJlbWFpbCI6InVzZXI0QGV4YW1wbGUuY29tIiwiaWF0IjoxNzQ4NzY5MzE5LCJleHAiOjE3NDg3NzI5MTl9.JDjuStV0ksX_aCBYnhz38cJM3yC_XYZwUYMR1KvJtcY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"ocena\": 3,\r\n  \"komentarz\": \"takie średnie...\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:3000/oceny/68016f34fc394a8e3099b62c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"oceny",
+								"68016f34fc394a8e3099b62c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Przepisy",
+			"item": [
+				{
+					"name": "/przepisy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/przepisy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"przepisy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/przepisy/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/przepisy/683c379939b5076e15d3a86f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"przepisy",
+								"683c379939b5076e15d3a86f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/przepisy?skladnik",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/przepisy?skladnik=cebula",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"przepisy"
+							],
+							"query": [
+								{
+									"key": "skladnik",
+									"value": "cebula"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/przepisy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODNjNmE4OGFmODFhNzVlM2RkNTUxZDciLCJlbWFpbCI6InVzZXIxQGV4YW1wbGUuY29tIiwiaWF0IjoxNzQ4NzkzNDYxLCJleHAiOjE3NDg3OTcwNjF9.TQl6VEyWpPB7Nh3RDdI1mTfQ6l1Hz_skk0RWkKIELms",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"tytul\": \"Zupa krem z dyni\",\r\n        \"czas\": 30,\r\n        \"kategoria\": \"zupa\",\r\n        \"skladniki\": [\r\n            \"dynia\",\r\n            \"czosnek\",\r\n            \"cebula\",\r\n            \"bulion\",\r\n            \"pomidory\",\r\n            \"pietruszka\",\r\n            \"papryka\"\r\n        ],\r\n        \"kroki\": [\r\n            \"Pokrój warzywa\",\r\n            \"Podsmaż cebulę\",\r\n            \"Dodaj bulion\",\r\n            \"Zmiksuj\"\r\n        ]\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/przepisy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"przepisy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/przepisy/:id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"_id\": \"68016e3cfc394a8e3099b625\",\r\n        \"tytul\": \"Zupa krem z dyni\",\r\n        \"autor\": \"Ania\",\r\n        \"czas\": 30,\r\n        \"kategoria\": \"zupa\",\r\n        \"skladniki\": [\r\n            \"dynia\",\r\n            \"czosnek\",\r\n            \"cebula\",\r\n            \"bulion\",\r\n            \"pomidory\",\r\n            \"pietruszka\",\r\n            \"papryka\"\r\n        ],\r\n        \"kroki\": [\r\n            \"Pokrój warzywa\",\r\n            \"Podsmaż cebulę\",\r\n            \"Dodaj bulion\",\r\n            \"Zmiksuj\"\r\n        ],\r\n        \"ocena\": 5,\r\n        \"dataDodania\": \"2025-04-17T21:10:20.253Z\",\r\n        \"__v\": 0\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/przepisy/68016e3cfc394a8e3099b625",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"przepisy",
+								"68016e3cfc394a8e3099b625"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/przepisy/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODNjNmE4OGFmODFhNzVlM2RkNTUxZDciLCJlbWFpbCI6InVzZXIxQGV4YW1wbGUuY29tIiwiaWF0IjoxNzQ4NzkwOTQwLCJleHAiOjE3NDg3OTQ1NDB9.KHhjxn94lEuQdgDSwreeR15JxV6kKPOSi8oQuuk_nfQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/przepisy/683c6b4aaf81a75e3dd551dd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"przepisy",
+								"683c6b4aaf81a75e3dd551dd"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
