@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
     console.log('Parametry zapytania:', req.query);
 
     if (skladnik) {
-      query.skladniki = { $regex: new RegExp(skladnik, 'i') }; // + ignorowanie wielkości liter (chyba), można to będzie zamienić na jakieś toLowerCase() czy coś
+      query.skladniki = { $regex: new RegExp(skladnik, 'i') };
     }
 
     const przepisy = await Przepis.find(query); // przepisy sprawdzamy z query
